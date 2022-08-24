@@ -7,7 +7,7 @@ require('dotenv').config()// Allows for hidden variables/files
 //Initiates DB
 let db,  
     dbConnectionStr = process.env.DB_STRING,// declares the db by importing the function in the env file
-    dbName = 'todo' // names the database
+    dbName = 'Books' // names the database
 //Connects to Mongo database
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }) //connects the db 
     .then(client => {

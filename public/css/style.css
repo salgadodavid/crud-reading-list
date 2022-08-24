@@ -1,7 +1,8 @@
-h1{
-    color: red;
-}
+
 .completed{
     color: gray;
     text-decoration: line-through;
 }
+input[type="text"]::placeholder {  
+    text-align: center; 
+} 
