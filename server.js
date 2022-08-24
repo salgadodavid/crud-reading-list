@@ -7,7 +7,7 @@ require('dotenv').config()// Allows for hidden variables/files
 //Initiates DB
 let db,  
     dbConnectionStr = process.env.DB_STRING,// declares the db by importing the function in the env file
-    dbName = 'Books' // names the database
+    dbName = 'ReadingLists' // names the database
 //Connects to Mongo database
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }) //connects the db 
     .then(client => {
@@ -22,8 +22,8 @@ app.use(express.json())//Takes the object and turns it into JSON
 
 // API
 app.get('/',async (request, response)=>{  //Determines what our api does when there is a client request for the Root
-    const todoItems = await db.collection('todos').find().toArray() //waits for the database to find the todo collection and make an arr with all documents
-    const itemsLeft = await db.collection('todos').countDocuments({completed: false})// counts number of documents that haven't been completed
+    const todoItems = await db.collection('Books').find().toArray() //waits for the database to find the todo collection and make an arr with all documents
+    const itemsLeft = await db.collection('Books').countDocuments({completed: false})// counts number of documents that haven't been completed
     response.render('index.ejs', { items: todoItems, left: itemsLeft }) //responds by rendering through ejs, all the num of items, and num left 
     // db.collection('todos').find().toArray()
     // .then(data => {
@@ -35,17 +35,17 @@ app.get('/',async (request, response)=>{  //Determines what our api does when th
     // .catch(error => console.error(error))
 })
 
-app.post('/addTodo', (request, response) => { //Create Requests
-    db.collection('todos').insertOne({thing: request.body.todoItem, completed: false})// Adds a new document to db based on form response
+app.post('/addBook', (request, response) => { //Create Requests
+    db.collection('Books').insertOne({thing: request.body.todoItem, Author: request.body.todoAuthor, completed: false})// Adds a new document to db based on form response
     .then(result => {
-        console.log('Todo Added') //tells us that storing the new document went ok
+        console.log('Book Added') //tells us that storing the new document went ok
         response.redirect('/')//redirects/ refreshes root to display new doc added
     })
     .catch(error => console.error(error))// displays error in console in case there was one
 })
 
 app.put('/markComplete', (request, response) => {  //UPDATE REQUEST for completed todo
-    db.collection('todos').updateOne({thing: request.body.itemFromJS},{// Finds todos db, and updates a document based on item name
+    db.collection('Books').updateOne({thing: request.body.itemFromJS},{// Finds todos db, and updates a document based on item name
         $set: {
             completed: true //sets the document's completed to true
           }
@@ -62,7 +62,7 @@ app.put('/markComplete', (request, response) => {  //UPDATE REQUEST for complete
 })
 
 app.put('/markUnComplete', (request, response) => { //request for undoing a todo that was marked as complete
-    db.collection('todos').updateOne({thing: request.body.itemFromJS},{// goes to db and updates the doc based on form's body 
+    db.collection('Books').updateOne({thing: request.body.itemFromJS},{// goes to db and updates the doc based on form's body 
         $set: {
             completed: false //changes object's completed value to false
           }
@@ -71,7 +71,7 @@ app.put('/markUnComplete', (request, response) => { //request for undoing a todo
         upsert: false // DOESN'T create a new doc if there wasn't any
     })
     .then(result => {
-        console.log('Marked Complete') //logs completed update
+        console.log('Marked Read') //logs completed update
         response.json('Marked Complete') //responds to client (fetch) that update was completed 
     })
     .catch(error => console.error(error))//handels errors
@@ -79,7 +79,7 @@ app.put('/markUnComplete', (request, response) => { //request for undoing a todo
 })
 
 app.delete('/deleteItem', (request, response) => { //Delete request
-    db.collection('todos').deleteOne({thing: request.body.itemFromJS}) //goes to db and finds doc based on name and deletes it
+    db.collection('Books').deleteOne({thing: request.body.itemFromJS}) //goes to db and finds doc based on name and deletes it
     .then(result => {
         console.log('Todo Deleted') //displays deleted on console
         response.json('Todo Deleted')

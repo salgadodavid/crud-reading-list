@@ -12,18 +12,15 @@
     <section class="container my-5">
         <h1  class="display-4 text-center">Reading<span class="text-warning">List</span></h1>
     </section>
-    <form id="book-form" action="/todos/createTodo" method='POST'>
+    <form id="book-form" action="/addBook" method='POST'>
+
         <div class="form-group text-center mx-5 my-3 px-5">
             <label class ="text-center" for="title">Book Title</label>
             <input type="text" id="title" class="form-control" placeholder="e.g. The Republic" name="todoItem">
         </div>
         <div class="form-group text-center mx-5 my-3 px-5">
             <label for="author">Author</label>
-            <input type="text" id="author" class="form-control" placeholder="e.g. Plato">
-        </div>
-        <div class="form-group text-center mx-5 my-3 px-5">
-            <label for="isbn">ISBN</label>
-            <input type="text" id="isbn" class="form-control" placeholder="13 Digits e.g. 978-3-16-148410-0">
+            <input type="text" id="author" class="form-control" placeholder="e.g. Plato" name="todoAuthor">
         </div>
         <div class="d-flex justify-content-center my-4">
             <button class="btn btn-warning" type="submit" id="add-book-btn">Add to your list!</button>
