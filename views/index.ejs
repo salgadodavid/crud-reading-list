@@ -5,18 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reading List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <section class="container my-5">
         <h1  class="display-4 text-center">Reading<span class="text-warning">List</span></h1>
+        <div class="container my-5">
+            <h2 class="h3 text-center"><span class="text-warning"> Left to Read: </span> <%= left %></h2>
+        </div>
     </section>
-    <form id="book-form" action="/addBook" method='POST'>
+    <section id="to-read" class="text-center my-5">
+       
+        <ul>
+            <% for(let i=0; i < items.length; i++) {%>  <!-- loops through every element in the items arr and creates a new li and span for each item-->
+                <li class="item" data-id="<%=items[i]._id%>">
+                    <% if(items[i].completed === true) {%> <!-- if item has a key value pair of completed true, it is assigned class completed-->
+                        <span class='completed'><%= items[i].thing%> <%= items[i].Author %></span>
+                    <% }else{ %> <!-- if item has a key value pair of completed false, it is created without class-->
+                        <span class="incomplete"><%= items[i].thing %> , <%= items[i].Author %></span> 
+                    <% } %>    
+                    <span id="" class='fa fa-trash'>Delete</span>
+                </li>
+            <% } %>
+            </ul>
+    </section>
+    
+    <form id="book-form" action="/addBook" method='POST' class="py-5">
 
         <div class="form-group text-center mx-5 my-3 px-5">
             <label class ="text-center" for="title">Book Title</label>
-            <input type="text" id="title" class="form-control" placeholder="e.g. The Republic" name="todoItem">
+            <input type="text" id="title" class="form-control" placeholder="e.g. The Republic" name="bookTitle">
         </div>
         <div class="form-group text-center mx-5 my-3 px-5">
             <label for="author">Author</label>
@@ -26,21 +46,9 @@
             <button class="btn btn-warning" type="submit" id="add-book-btn">Add to your list!</button>
           </div>
     </form>
-    <ul>
-    <% for(let i=0; i < items.length; i++) {%>  <!-- loops through every element in the items arr and creates a new li and span for each item-->
-        <li class="item">
-            <% if(items[i].completed === true) {%> <!-- if item has a key value pair of completed true, it is assigned class completed-->
-                <span class='completed'><%= items[i].thing %></span>
-            <% }else{ %> <!-- if item has a key value pair of completed false, it is created without class-->
-                <span><%= items[i].thing %></span> 
-            <% } %>    
-            <span class='fa fa-trash'></span>
-        </li>
-    <% } %>
-    </ul>
-    <section class="container my-5">
-        <h2  class="display-5 text-center"><span class="text-warning"> Left to Read: </span> <%= left %></h2>
-    </section>
+
+   
+   
 
     <script src='js/main.js'></script>
 </body>

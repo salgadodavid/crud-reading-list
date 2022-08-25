@@ -24,10 +24,10 @@ app.use(express.json())//Takes the object and turns it into JSON
 app.get('/',async (request, response)=>{  //Determines what our api does when there is a client request for the Root
     const todoItems = await db.collection('Books').find().toArray() //waits for the database to find the todo collection and make an arr with all documents
     const itemsLeft = await db.collection('Books').countDocuments({completed: false})// counts number of documents that haven't been completed
-    response.render('index.ejs', { items: todoItems, left: itemsLeft }) //responds by rendering through ejs, all the num of items, and num left 
+    response.render('index.ejs', { items: todoItems, left: itemsLeft })//responds by rendering through ejs, all the num of items, and num left 
     // db.collection('todos').find().toArray()
     // .then(data => {
-    //     db.collection('todos').countDocuments({completed: false})
+    //     db.collection('todos').countDocuments({completed: false})  const author = await db.collection('Books').find().toArray()
     //     .then(itemsLeft => {
     //         response.render('index.ejs', { items: data, left: itemsLeft })
     //     })
@@ -36,7 +36,7 @@ app.get('/',async (request, response)=>{  //Determines what our api does when th
 })
 
 app.post('/addBook', (request, response) => { //Create Requests
-    db.collection('Books').insertOne({thing: request.body.todoItem, Author: request.body.todoAuthor, completed: false})// Adds a new document to db based on form response
+    db.collection('Books').insertOne({thing: request.body.bookTitle, Author: request.body.todoAuthor, completed: false})// Adds a new document to db based on form response
     .then(result => {
         console.log('Book Added') //tells us that storing the new document went ok
         response.redirect('/')//redirects/ refreshes root to display new doc added
@@ -44,8 +44,8 @@ app.post('/addBook', (request, response) => { //Create Requests
     .catch(error => console.error(error))// displays error in console in case there was one
 })
 
-app.put('/markComplete', (request, response) => {  //UPDATE REQUEST for completed todo
-    db.collection('Books').updateOne({thing: request.body.itemFromJS},{// Finds todos db, and updates a document based on item name
+app.put('/markRead', (request, response) => {  //UPDATE REQUEST for completed todo
+    db.collection('Books').updateOne({_id: request.body.bookFromJS},{// Finds todos db, and updates a document based on item name
         $set: {
             completed: true //sets the document's completed to true
           }
@@ -54,15 +54,15 @@ app.put('/markComplete', (request, response) => {  //UPDATE REQUEST for complete
         upsert: false  //DOESN'T create a  new doc if it doesnt exist
     })
     .then(result => {
-        console.log('Marked Complete') //console log it's completed
-        response.json('Marked Complete') //responds to the client (fetch request)
+        console.log('Marked Read REALLLY? HOW?') //console log it's completed
+        response.json('Marked Read') //responds to the client (fetch request)
     })
     .catch(error => console.error(error))//displays error
 
 })
 
-app.put('/markUnComplete', (request, response) => { //request for undoing a todo that was marked as complete
-    db.collection('Books').updateOne({thing: request.body.itemFromJS},{// goes to db and updates the doc based on form's body 
+app.put('/markUnread', (request, response) => { //request for undoing a todo that was marked as complete
+    db.collection('Books').updateOne({_id: request.body.bookFromJS},{// goes to db and updates the doc based on form's body 
         $set: {
             completed: false //changes object's completed value to false
           }
@@ -71,21 +71,20 @@ app.put('/markUnComplete', (request, response) => { //request for undoing a todo
         upsert: false // DOESN'T create a new doc if there wasn't any
     })
     .then(result => {
-        console.log('Marked Read') //logs completed update
-        response.json('Marked Complete') //responds to client (fetch) that update was completed 
+        console.log('Marked unread') //logs completed update
+        response.json('Marked unRead') //responds to client (fetch) that update was completed 
     })
     .catch(error => console.error(error))//handels errors
 
 })
 
-app.delete('/deleteItem', (request, response) => { //Delete request
-    db.collection('Books').deleteOne({thing: request.body.itemFromJS}) //goes to db and finds doc based on name and deletes it
+app.delete('/deleteBook', (request, response) => { //Delete request
+    db.collection('Books').deleteOne({ _id: request.body.bookFromJS}) //goes to db and finds doc based on name and deletes it
     .then(result => {
-        console.log('Todo Deleted') //displays deleted on console
-        response.json('Todo Deleted')
+        console.log('Book Deleted') //displays deleted on console
+        response.json('Book Deleted')    
     })
     .catch(error => console.error(error))// handles errors
-
 })
 
 app.listen(process.env.PORT || PORT, ()=>{ //sets our server on port established by us or host
