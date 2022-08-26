@@ -1,6 +1,6 @@
-const deleteBtn = document.querySelectorAll('.fa-trash')  // imports delete button by class of fa-trash
-const book = document.querySelectorAll('.item span.incomplete') //imports item by class of 
-const bookRead = document.querySelectorAll('.item span.completed')
+const deleteBtn = document.querySelectorAll('#deleteButton')  // imports delete button by class of fa-trash
+const book = document.querySelectorAll('#flexSwitchCheckDefault') //imports item by class of 
+const bookRead = document.querySelectorAll('#flexSwitchCheckChecked')
 
 Array.from(deleteBtn).forEach((element)=>{
     element.addEventListener('click', deleteBook)
@@ -15,7 +15,7 @@ Array.from(bookRead).forEach((element)=>{ //Creates a new event listener for eve
 })
 
 async function deleteBook(){  //function that deletes item 
-    const bookId = this.parentNode.dataset.id// grabs the value (inner text) of the item clicked for deletion
+    const bookId = this.parentNode.parentNode.dataset.id// grabs the value (inner text) of the item clicked for deletion
     try{
         const response = await fetch('deleteBook', { //makes a fetch request
             method: 'delete',   //delete request
@@ -34,7 +34,7 @@ async function deleteBook(){  //function that deletes item
 }
 
 async function markRead(){  //mark complete function
-    const bookId = this.parentNode.dataset.id  // gets value of item that is marked as completed
+    const bookId = this.parentNode.parentNode.parentNode.dataset.id  // gets value of item that is marked as completed
     try{
         const response = await fetch('markRead', { //makes fetch request to server
             method: 'put', //defines the type of request to be a put
@@ -53,7 +53,7 @@ async function markRead(){  //mark complete function
 }
 
 async function markUnread(){ //uncomplete function
-    const bookId = this.parentNode.dataset.id // sets value of item to itemText
+    const bookId = this.parentNode.parentNode.parentNode.dataset.id // sets value of item to itemText
     try{
         const response = await fetch('markUnread', { // makes fetch request
             method: 'put', //request is put (update)

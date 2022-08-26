@@ -16,17 +16,47 @@
             <h2 class="h3 text-center"><span class="text-warning"> Left to Read: </span> <%= left %></h2>
         </div>
     </section>
-    <section id="to-read" class="text-center my-5">
-       
-        <ul>
-            <% items.forEach(book => { %>
-                <li class="item" data-id="<%=book._id%>">
-                    <span class="<%= book.completed === true ? "completed" : "incomplete"%>"> <%= book.thing%> , <%=book.Author %></span>
-                    <span class='fa fa-trash'>Delete</span>
-                </li>
-            <% }) %>
+ 
+    <section id="tableDisplay" class="mx-5 my-3 px-5">
+        <table class="table table-hover">  <!--mx-5 my-3 px-5-->
+            <thead>
+                <tr class="table-primary">
+                  <th scope="col">Status</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Book Title</th>
+                  <th scope="col">Remove</th>
+                </tr>
+            </thead>
+            <tbody id="to-read">
+                    <% items.forEach(book => { %>
+                        <tr data-id="<%=book._id%>" class="<%= book.completed === true ? "completed" : "incomplete"%>">
+                            <td>  
+                                <% if (book.completed) { %>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
+                                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                    </div>
+                                  <%} else { %>
+                                      
+                                    <div class="form-check form-switch">
+                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    </div>
+                                    <% } %>
+                            </td>
+                            <td class="auth"> <%=book.Author %></td>
+                            <td class="title"> <%= book.thing%> </td>
+                            <td class="read"><button type="button" class="btn btn-danger" id="deleteButton">Delete</button></td>
+                        </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
     </section>
-    
+    <section id="add-books">
+        <div class="container my-5">
+            <h2 class="h3 text-center"><span class="text-warning"> Add More Books: </span></h2>
+        </div>
     <form id="book-form" action="/addBook" method='POST' class="py-5">
 
         <div class="form-group text-center mx-5 my-3 px-5">
@@ -41,6 +71,7 @@
             <button class="btn btn-warning" type="submit" id="add-book-btn">Add to your list!</button>
           </div>
     </form>
+    </section>
 
    
    

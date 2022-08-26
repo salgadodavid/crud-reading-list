@@ -1,8 +1,9 @@
 
-.completed{
-    color: rgb(6, 10, 6);
-    text-decoration: line-through;
+tr.completed{
+  background-color: rgb(153, 198, 153);
 }
+
+
 input[type="text"]::placeholder {  
     text-align: center; 
 } 
