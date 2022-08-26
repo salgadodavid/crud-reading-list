@@ -19,17 +19,12 @@
     <section id="to-read" class="text-center my-5">
        
         <ul>
-            <% for(let i=0; i < items.length; i++) {%>  <!-- loops through every element in the items arr and creates a new li and span for each item-->
-                <li class="item" data-id="<%=items[i]._id%>">
-                    <% if(items[i].completed === true) {%> <!-- if item has a key value pair of completed true, it is assigned class completed-->
-                        <span class='completed'><%= items[i].thing%> <%= items[i].Author %></span>
-                    <% }else{ %> <!-- if item has a key value pair of completed false, it is created without class-->
-                        <span class="incomplete"><%= items[i].thing %> , <%= items[i].Author %></span> 
-                    <% } %>    
-                    <span id="" class='fa fa-trash'>Delete</span>
+            <% items.forEach(book => { %>
+                <li class="item" data-id="<%=book._id%>">
+                    <span class="<%= book.completed === true ? "completed" : "incomplete"%>"> <%= book.thing%> , <%=book.Author %></span>
+                    <span class='fa fa-trash'>Delete</span>
                 </li>
-            <% } %>
-            </ul>
+            <% }) %>
     </section>
     
     <form id="book-form" action="/addBook" method='POST' class="py-5">
@@ -53,3 +48,5 @@
     <script src='js/main.js'></script>
 </body>
 </html>
+
+

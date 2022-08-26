@@ -44,18 +44,17 @@ app.post('/addBook', (request, response) => { //Create Requests
     .catch(error => console.error(error))// displays error in console in case there was one
 })
 
-app.put('/markRead', (request, response) => {  //UPDATE REQUEST for completed todo
-    db.collection('Books').updateOne({_id: request.body.bookFromJS},{// Finds todos db, and updates a document based on item name
-        $set: {
-            completed: true //sets the document's completed to true
-          }
-    },{
-        sort: {_id: -1},//sorts arr in descending order by id once a doc has been markes as completed
-        upsert: false  //DOESN'T create a  new doc if it doesnt exist
-    })
+app.put('/markRead', (request, response) => {    //UPDATE REQUEST for completed todo
+    db.collection('Books').updateOne(
+        {_id: request.body.bookFromJS},   // Finds todos db, and updates a document based on item id
+        { $set: {completed: true } },   //sets the document's completed to true     
+        {
+          sort: {_id: -1},//sorts arr in descending order by id once a doc has been markes as completed
+          upsert: false  //DOESN'T create a  new doc if it doesnt exist
+        })
     .then(result => {
-        console.log('Marked Read REALLLY? HOW?') //console log it's completed
-        response.json('Marked Read') //responds to the client (fetch request)
+        console.log('I dont see it') //console log it's completed
+        response.json('Marked Complete') //responds to the client (fetch request)
     })
     .catch(error => console.error(error))//displays error
 

@@ -1,6 +1,6 @@
 
 .completed{
-    color: gray;
+    color: rgb(6, 10, 6);
     text-decoration: line-through;
 }
 input[type="text"]::placeholder {  
