@@ -1,8 +1,10 @@
 const express = require('express') //Imports Express
 const app = express() //Creates an Express app
 const MongoClient = require('mongodb').MongoClient //Imports MongoDB
+const ObjectId = require('mongodb').ObjectId;
 const PORT = 2121  // Defines Port
 require('dotenv').config()// Allows for hidden variables/files
+
 
 //Initiates DB
 let db,  
@@ -46,7 +48,7 @@ app.post('/addBook', (request, response) => { //Create Requests
 
 app.put('/markRead', (request, response) => {    //UPDATE REQUEST for completed todo
     db.collection('Books').updateOne(
-        {_id: request.body.bookFromJS},   // Finds todos db, and updates a document based on item id
+        { _id: new ObjectId(request.body.bookFromJS)},   // Finds todos db, and updates a document based on item id
         { $set: {completed: true } },   //sets the document's completed to true     
         {
           sort: {_id: -1},//sorts arr in descending order by id once a doc has been markes as completed
@@ -61,7 +63,7 @@ app.put('/markRead', (request, response) => {    //UPDATE REQUEST for completed 
 })
 
 app.put('/markUnread', (request, response) => { //request for undoing a todo that was marked as complete
-    db.collection('Books').updateOne({_id: request.body.bookFromJS},{// goes to db and updates the doc based on form's body 
+    db.collection('Books').updateOne({_id: new ObjectId(request.body.bookFromJS)},{// goes to db and updates the doc based on form's body 
         $set: {
             completed: false //changes object's completed value to false
           }
@@ -78,7 +80,7 @@ app.put('/markUnread', (request, response) => { //request for undoing a todo tha
 })
 
 app.delete('/deleteBook', (request, response) => { //Delete request
-    db.collection('Books').deleteOne({ _id: request.body.bookFromJS}) //goes to db and finds doc based on name and deletes it
+    db.collection('Books').deleteOne({ _id: new ObjectId(request.body.bookFromJS)}) //goes to db and finds doc based on name and deletes it
     .then(result => {
         console.log('Book Deleted') //displays deleted on console
         response.json('Book Deleted')    
