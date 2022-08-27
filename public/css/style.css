@@ -1,6 +1,6 @@
 
 tr.completed{
-  background-color: rgb(153, 198, 153);
+  background-color: #f0ad4e;
 }
 
 
@@ -10,4 +10,13 @@ input[type="text"]::placeholder {
 
 li {
     list-style: none;
+}
+
+.form-check-input:checked {
+  background-color: green;
+  border-color: green;
+}
+
+.btn-danger {
+background-color: #d60404;
 }
