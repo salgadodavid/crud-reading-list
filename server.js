@@ -23,6 +23,11 @@ app.use(express.urlencoded({ extended: true })) // It parses incoming requests w
 app.use(express.json())//Takes the object and turns it into JSON 
 
 // API
+
+app.listen(process.env.PORT || PORT, () =>{ //sets our server on port established by us or host
+    console.log(`Server running on port ${PORT}`) //console logs the port the server is running on
+})
+
 app.get('/',async (request, response)=>{  //Determines what our api does when there is a client request for the Root
     const todoItems = await db.collection('Books').find().toArray() //waits for the database to find the todo collection and make an arr with all documents
     const itemsLeft = await db.collection('Books').countDocuments({completed: false})// counts number of documents that haven't been completed
@@ -88,6 +93,3 @@ app.delete('/deleteBook', (request, response) => { //Delete request
     .catch(error => console.error(error))// handles errors
 })
 
-app.listen(process.env.PORT || PORT, ()=>{ //sets our server on port established by us or host
-    console.log(`Server running on port ${PORT}`) //console logs the port the server is running on
-})
