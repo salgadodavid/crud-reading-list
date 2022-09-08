@@ -6,7 +6,7 @@ It also takes the guesswork out of exercise by providing three exercises for you
 ---
 ## Screenshot
 
-[reading-list-full-stack-app](https://user-images.githubusercontent.com/86321333/189157558-a684a07c-dc1c-4bbf-8515-e996df623a00.png)
+![reading-list-full-stack-app](https://user-images.githubusercontent.com/86321333/189157558-a684a07c-dc1c-4bbf-8515-e996df623a00.png)
 
 
 ---
