@@ -1,7 +1,6 @@
 
-The CrossFlex Ultimate Daily Workout app encourages the healthy habit of daily exercise through gamification! 
+The Reading List is fully functional CRUD Application that helps people get into the habit of reading.
 
-It also takes the guesswork out of exercise by providing three exercises for you to complete each day.
 
 ---
 ## Screenshot
@@ -12,7 +11,7 @@ It also takes the guesswork out of exercise by providing three exercises for you
 ---
 ## How It Works:
 
-The user can access the FREE app by simply clicking Signup and creating an account.
+The user can access the FREE app by simply going to the link. 
 
 Once logged in, the user will see three exercises to perform that day. Each exercise will be worth 10 points. The user completes each exercise and clicks on the exercise name. This automatically adds the 10 points to both a daily score and a running score.
 
@@ -22,13 +21,14 @@ The user also has the option to manually enter a fourth exercise of their choosi
 
 ---
 
-> Link to project: https://crossflex.herokuapp.com
+> Link to project: coming soon
 
 ---
 
 ## How It's Made:
 
-**Tech used:** HTML, CSS, JavaScript, MongoDB, Heroku
+**Tech used:** Front-end: HTML, CSS, Bootstrap5, JavaScript. 
+               Back-end:  Node.js, Express, EJS, MongoDB, Heroku
 
 - Packages/ Dependencies used: bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator
 
@@ -36,9 +36,7 @@ The user also has the option to manually enter a fourth exercise of their choosi
 
 ## Who is this for?
 
-Total beginners, workout aficionados, and everyone in between! 
-
-If you want to improve your health through exercise, this app is for you.
+Students, readers, and people who want to build the habit of reading.
 
 
 
@@ -46,7 +44,9 @@ If you want to improve your health through exercise, this app is for you.
 
 ## Optimizations
 
-With the next update, we aim to implement a leaderboard function whereby logged-in users can see a leaderboard, ranking the users with the most points at the top.
+Add Authentication:
+
+With the next update, my goal is to implement authentication whereby logged-in will have predetermined reading-lists that they can keep track off. 
 
 ---
 
