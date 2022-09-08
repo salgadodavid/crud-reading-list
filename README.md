@@ -13,11 +13,7 @@ The Reading List is fully functional CRUD Application that helps people get into
 
 The user can access the FREE app by simply going to the link. 
 
-Once logged in, the user will see three exercises to perform that day. Each exercise will be worth 10 points. The user completes each exercise and clicks on the exercise name. This automatically adds the 10 points to both a daily score and a running score.
-
-The user also has the option to manually enter a fourth exercise of their choosing, to earn even more points!
-
-*The points act as a visual representation of your consistency with the daily exercises, as well as gives you an incentive to drive those points as high as they can go!*
+The user can add the title and author of the books they are reading. The user can keep track of what they have read by clicking the toggle button, and they also have the ability to remove books from the list by clicking the delete button. 
 
 ---
 
