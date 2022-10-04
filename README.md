@@ -23,10 +23,7 @@ The user can add the title and author of the books they are reading. The user ca
 ## How It's Made:
 
 **Tech used:** Front-end: HTML, CSS, Bootstrap5, JavaScript. 
-               Back-end:  Node.js, Express, EJS, MongoDB, Heroku
-
-- Packages/ Dependencies used: bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator
-
+               Back-end:  Node.js, Express, EJS, MongoDB, 
 ---
 
 ## Who is this for?
