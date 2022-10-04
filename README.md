@@ -3,7 +3,6 @@ The Reading List is fully functional CRUD Application that helps people get into
 
 
 ---
-## Screenshot
 
 ![reading-list-full-stack-app](https://user-images.githubusercontent.com/86321333/189157558-a684a07c-dc1c-4bbf-8515-e996df623a00.png)
 
@@ -47,11 +46,4 @@ With the next update, my goal is to implement authentication whereby logged-in w
 ---
 
 ## Lessons Learned:
-
-1. While working with both the moment module and the MongoDB Atlas service, we encountered a bug where users could not log in based on their respective time zones. Resolved by making sure the time noted in the database read 2022-09-05T00]:00:00.000+00:00 instead of 2022-09-05T04:00:00.000+00:00.
-
-
-##If you want to check it out make sure to:
-
-1. npm install
-2. Make a database (MongoDB) and ad DB_STRING to .env file
+*How to incoroporate CRUD functionalities. 
